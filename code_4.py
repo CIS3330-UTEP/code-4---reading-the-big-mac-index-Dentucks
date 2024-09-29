@@ -17,18 +17,23 @@ def get_big_mac_price_by_country(country_code):
     den_price = round(Cou_Code['dollar_price'].mean(),2)
     return den_price
 
-# def get_the_cheapest_big_mac_price_by_year(year):
-#     df = pd.read_csv('./big-mac-full-index.csv')
-#     yr_query =
-#     min =
-#     result = ('Malaysia(MYS): $%.1f' % (min))
+def get_the_cheapest_big_mac_price_by_year(year):
+    df = pd.read_csv('./big-mac-full-index.csv')
+    filtere_data = df[df['date'].str.contains(str(year))]
+    if not filtere_data.empty:
+        max_price_row = filtere_data.loc[filtere_data['dollar_price'].idxmax()]
+        result = f"{max_price_row['name']}({max_price_row['iso_a3']}): ${max_price_row['dollar_price']:.1}"
+        return result
+    else:
+        return f"No data available for the year {year}"
+    
 
-# def get_the_most_expensive_big_mac_price_by_year(year):
-#     df = pd.read_csv('./big-mac-full-index.csv')
-#     yr_query =
-#     max =
-#     result = ('Malaysia(MYS): $%.1f' % (max))
-#     return result
+def get_the_most_expensive_big_mac_price_by_year(year):
+     df = pd.read_csv('./big-mac-full-index.csv')
+     yr_query =
+     max =
+     result = ('Malaysia(MYS): $%.1f' % (max))
+     return result
 
 if __name__ == "__main__":
     mac1 = get_big_mac_price_by_year(2008,'rus')
